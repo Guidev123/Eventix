@@ -20,7 +20,7 @@ namespace Eventix.Modules.Ticketing.Infrastructure.Events.IntegrationEvents
                 MapToTicketTypeRequest(integrationEvent.TicketTypes)
                 );
 
-            var result = await mediator.DispatchAsync(command, cancellationToken);
+            var result = await mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
                 throw new EventixException(nameof(CreateEventCommand), result.Error);

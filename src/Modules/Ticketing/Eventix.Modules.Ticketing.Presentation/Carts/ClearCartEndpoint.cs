@@ -16,7 +16,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Carts
         {
             app.MapDelete("api/v1/carts", async (ClaimsPrincipal claimsPrincipal, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new ClearCartCommand(claimsPrincipal.GetUserId())).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new ClearCartCommand(claimsPrincipal.GetUserId())).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.RemoveFromCart).WithTags(Tags.Carts);

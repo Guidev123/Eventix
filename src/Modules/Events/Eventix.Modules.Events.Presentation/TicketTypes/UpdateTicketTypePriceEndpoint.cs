@@ -15,7 +15,7 @@ namespace Eventix.Modules.Events.Presentation.TicketTypes
             app.MapPut("api/v1/events/ticket-types/{id:guid}/price", async (Guid id, UpdateTicketTypePriceCommand command, IMediatorHandler mediator) =>
             {
                 command.SetTicketTypeId(id);
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.ModifyTicketTypes)

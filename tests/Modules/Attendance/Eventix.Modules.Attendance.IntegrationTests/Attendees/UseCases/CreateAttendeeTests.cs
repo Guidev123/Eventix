@@ -23,7 +23,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Attendees.UseCases
                 string.Empty);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();
@@ -41,7 +41,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Attendees.UseCases
                 _faker.Name.LastName());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

@@ -21,7 +21,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var query = new GetAllCategoriesQuery(1, 50);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(query);
+            var result = await _mediatorHandler.SendAsync(query);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
@@ -41,7 +41,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var query = new GetAllCategoriesQuery(1, 50);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(query);
+            var result = await _mediatorHandler.SendAsync(query);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

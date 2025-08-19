@@ -20,7 +20,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Events.UseCases
             var query = new GetEventStatisticsQuery(Guid.NewGuid());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(query);
+            var result = await _mediatorHandler.SendAsync(query);
 
             // Assert
             result.Error.Should().Be(EventErrors.StatisticsNotFound(query.EventId));

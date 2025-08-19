@@ -17,7 +17,7 @@ namespace Eventix.Modules.Users.Infrastructure.Authorization
             if (cacheResult is not null)
                 return Result.Success(cacheResult);
 
-            var result = await mediator.DispatchAsync(new GetUserPermissionsQuery(identityId), cancellationToken).ConfigureAwait(false);
+            var result = await mediator.SendAsync(new GetUserPermissionsQuery(identityId), cancellationToken).ConfigureAwait(false);
 
             if (result.IsSuccess)
                 await cacheService.SetAsync(identityId, result.Value, TimeSpan.FromMinutes(CAHCE_EXPIRATION_TIME_IN_MINUTES), cancellationToken);

@@ -25,7 +25,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Attendees.UseCases
             command.SetAttendeeId(Guid.NewGuid());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(AttendeeErrors.NotFound(command.AttendeeId));
@@ -47,7 +47,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Attendees.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Events
         {
             app.MapDelete("api/v1/events/{id:guid}/cancel", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new CancelEventCommand(id)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new CancelEventCommand(id)).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.ModifyEvents)

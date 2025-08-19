@@ -35,7 +35,7 @@ namespace Eventix.Api.Middlewares
             {
                 EventixException eventixException when eventixException.Error?.Description is not null => eventixException.Error.Description,
                 _ when exception?.InnerException?.Message is not null => exception.InnerException.Message,
-                _ => exception?.Message ?? "Unknown error"
+                _ => "Unknown error"
             };
         }
     }

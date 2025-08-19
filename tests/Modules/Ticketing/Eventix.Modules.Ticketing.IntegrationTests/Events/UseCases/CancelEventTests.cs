@@ -24,7 +24,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
             var eventId = Guid.NewGuid();
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(new CancelEventCommand(eventId));
+            var result = await _mediatorHandler.SendAsync(new CancelEventCommand(eventId));
 
             //Assert
             result.Error.Should().Be(EventErrors.NotFound(eventId));
@@ -46,7 +46,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             //Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();

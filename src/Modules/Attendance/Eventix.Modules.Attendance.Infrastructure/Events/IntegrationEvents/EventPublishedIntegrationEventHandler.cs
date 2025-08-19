@@ -10,7 +10,7 @@ namespace Eventix.Modules.Attendance.Infrastructure.Events.IntegrationEvents
     {
         public override async Task ExecuteAsync(EventPublishedIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(new CreateEventCommand(
+            var result = await mediator.SendAsync(new CreateEventCommand(
                 integrationEvent.EventId,
                 integrationEvent.Title,
                 integrationEvent.Description,

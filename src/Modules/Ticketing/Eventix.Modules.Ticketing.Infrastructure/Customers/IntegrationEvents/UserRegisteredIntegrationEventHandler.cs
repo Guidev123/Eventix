@@ -10,7 +10,7 @@ namespace Eventix.Modules.Ticketing.Infrastructure.Customers.IntegrationEvents
     {
         public override async Task ExecuteAsync(UserRegisteredIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(new CreateCustomerCommand(
+            var result = await mediator.SendAsync(new CreateCustomerCommand(
                 integrationEvent.UserId,
                 integrationEvent.Email,
                 integrationEvent.FirstName,

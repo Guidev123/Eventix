@@ -25,7 +25,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             var command = new CancelEventCommand(eventId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(EventErrors.NotFound(eventId));
@@ -44,13 +44,13 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             using var newScope = _factory.Services.CreateScope();
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
-            await mediator.DispatchAsync(command);
+            await mediator.SendAsync(command);
 
             using var newScope2 = _factory.Services.CreateScope();
             var mediator2 = newScope2.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator2.DispatchAsync(command);
+            var result = await mediator2.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(EventErrors.AlreadyCanceled);
@@ -70,7 +70,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

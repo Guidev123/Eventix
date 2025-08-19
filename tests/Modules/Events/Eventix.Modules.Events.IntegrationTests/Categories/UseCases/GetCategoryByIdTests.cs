@@ -20,7 +20,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var query = new GetCategoryByIdQuery(Guid.NewGuid());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(query);
+            var result = await _mediatorHandler.SendAsync(query);
 
             // Assert
             result.Error.Should().Be(CategoryErrors.NotFound(query.CategoryId));
@@ -36,7 +36,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var query = new GetCategoryByIdQuery(categoryId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(query);
+            var result = await _mediatorHandler.SendAsync(query);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

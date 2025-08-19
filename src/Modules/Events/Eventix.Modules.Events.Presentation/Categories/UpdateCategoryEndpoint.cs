@@ -15,7 +15,7 @@ namespace Eventix.Modules.Events.Presentation.Categories
             app.MapPatch("api/v1/categories/{id:guid}", async (Guid id, UpdateCategoryCommand command, IMediatorHandler mediator) =>
             {
                 command.SetCategoryId(id);
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.ModifyCategories)

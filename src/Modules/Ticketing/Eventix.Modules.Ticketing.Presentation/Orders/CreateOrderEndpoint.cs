@@ -16,7 +16,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Orders
         {
             app.MapPost("api/v1/orders", async (ClaimsPrincipal claimsPrincipal, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new CreateOrderCommand(claimsPrincipal.GetUserId()));
+                var result = await mediator.SendAsync(new CreateOrderCommand(claimsPrincipal.GetUserId()));
 
                 return result.Match(() => Results.Ok(), ApiResults.Problem);
             })

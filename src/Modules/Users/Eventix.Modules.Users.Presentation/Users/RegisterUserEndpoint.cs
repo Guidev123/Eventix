@@ -14,7 +14,7 @@ namespace Eventix.Modules.Users.Presentation.Users
         {
             app.MapPost("api/v1/users", async (RegisterUserCommand command, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(
                     success => Results.Created($"/users/{result.Value.UserId}", result.Value),

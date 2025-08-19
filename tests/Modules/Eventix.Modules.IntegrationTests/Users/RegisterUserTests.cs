@@ -20,10 +20,10 @@ namespace Eventix.Modules.IntegrationTests.Users
             await _factory.SeedRoleDataAsync();
 
             // Act
-            var userResult = await _mediatorHandler.DispatchAsync(RegisterUserCommand);
+            var userResult = await _mediatorHandler.SendAsync(RegisterUserCommand);
             var customerResult = await Poller.WaitAndExecuteAsync(TimeSpan.FromSeconds(15), async () =>
             {
-                return await _mediatorHandler.DispatchAsync(new GetCustomerByIdQuery(userResult.Value.UserId));
+                return await _mediatorHandler.SendAsync(new GetCustomerByIdQuery(userResult.Value.UserId));
             });
 
             // Assert
@@ -43,10 +43,10 @@ namespace Eventix.Modules.IntegrationTests.Users
             await _factory.SeedRoleDataAsync();
 
             // Act
-            var userResult = await _mediatorHandler.DispatchAsync(RegisterUserCommand);
+            var userResult = await _mediatorHandler.SendAsync(RegisterUserCommand);
             var attendeeResult = await Poller.WaitAndExecuteAsync(TimeSpan.FromSeconds(15), async () =>
             {
-                return await _mediatorHandler.DispatchAsync(new GetAttendeeByIdQuery(userResult.Value.UserId));
+                return await _mediatorHandler.SendAsync(new GetAttendeeByIdQuery(userResult.Value.UserId));
             });
 
             // Assert

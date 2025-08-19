@@ -21,7 +21,7 @@ namespace Eventix.Modules.Events.Presentation.Events
                 [FromQuery] int page = PresentationModule.DEFAULT_PAGE,
                 [FromQuery] int pageSize = PresentationModule.DEFAULT_PAGE_SIZE) =>
             {
-                return (await mediator.DispatchAsync(
+                return (await mediator.SendAsync(
                     new SearchEventsQuery(categoryId, startDate,
                                           endDate, page, pageSize))
                 .ConfigureAwait(false)).Match(Results.Ok, ApiResults.Problem);

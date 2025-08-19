@@ -12,7 +12,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Abstractions
         internal static async Task<Guid> CreateCustomerAsync(this IMediatorHandler mediator, Guid customerId)
         {
             var faker = new Faker();
-            Result result = await mediator.DispatchAsync(
+            Result result = await mediator.SendAsync(
                 new CreateCustomerCommand(
                     customerId,
                     faker.Internet.Email(),
@@ -40,7 +40,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Abstractions
                 "USD",
                 quantity);
 
-            Result result = await mediator.DispatchAsync(new CreateEventCommand(
+            Result result = await mediator.SendAsync(new CreateEventCommand(
                 eventId,
                 faker.Music.Genre(),
                 faker.Lorem.Letter(50),

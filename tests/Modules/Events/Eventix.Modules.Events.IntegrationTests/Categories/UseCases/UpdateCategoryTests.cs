@@ -28,7 +28,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
         {
             // Act
             command.SetCategoryId(Guid.Empty);
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();
@@ -45,7 +45,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             command.SetCategoryId(categoryId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(CategoryErrors.NotFound(categoryId));
@@ -65,7 +65,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

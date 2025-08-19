@@ -10,7 +10,7 @@ namespace Eventix.Modules.Ticketing.Infrastructure.Payments.IntegrationEvents
     {
         public override async Task ExecuteAsync(OrderPlacedIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(new PayOrderCommand(
+            var result = await mediator.SendAsync(new PayOrderCommand(
                 integrationEvent.OrderId,
                 integrationEvent.TotalPrice,
                 integrationEvent.Currency

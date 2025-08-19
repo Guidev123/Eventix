@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Events
         {
             app.MapGet("api/v1/events/{id:guid}", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetEventByIdQuery(id)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetEventByIdQuery(id)).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetEvents).WithTags(Tags.Events);

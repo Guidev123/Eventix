@@ -26,7 +26,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
             var command = new RescheduleEventCommand(eventId, startsAtUtc, endsAtUtc);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(EventErrors.NotFound(command.EventId));
@@ -47,7 +47,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
             var command = new RescheduleEventCommand(eventId, startsAtUtc, endsAtUtc);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(EventErrors.StartDateInPast);
@@ -68,7 +68,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
             var command = new RescheduleEventCommand(eventId, startsAtUtc, endsAtUtc);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(EventErrors.StartDateInPast);

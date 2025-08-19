@@ -12,7 +12,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Abstractions
         internal static async Task<Guid> CreateAttendeeAsync(this IMediatorHandler mediator, Guid attendeeId)
         {
             var faker = new Faker();
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                 new CreateAttendeeCommand(
                     attendeeId,
                     faker.Internet.Email(),
@@ -31,7 +31,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Abstractions
             Guid eventId)
         {
             var faker = new Faker();
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                 new CreateTicketCommand(
                     ticketId,
                     attendeeId,
@@ -46,7 +46,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Abstractions
         internal static async Task<Guid> CreateEventAsync(this IMediatorHandler mediator, Guid eventId)
         {
             var faker = new Faker();
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                 new CreateEventCommand(
                     eventId,
                     faker.Music.Genre(),

@@ -17,7 +17,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Carts
             app.MapPost("api/v1/carts/item", async (ClaimsPrincipal claimsPrincipal, AddItemToCartCommand command, IMediatorHandler mediator) =>
             {
                 command.SetCustomerId(claimsPrincipal.GetUserId());
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(() => Results.Ok(), ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.AddToCart).WithTags(Tags.Carts);

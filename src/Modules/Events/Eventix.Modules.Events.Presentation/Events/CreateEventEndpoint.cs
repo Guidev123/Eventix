@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Events
         {
             app.MapPost("api/v1/events", async (CreateEventCommand command, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(
                     success => Results.Created($"/events/{result.Value.Id}", result.Value),

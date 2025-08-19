@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.TicketTypes
         {
             app.MapPost("api/v1/events/ticket-types", async (CreateTicketTypeCommand command, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(
                     success => Results.Created($"/events/ticket-types/{success.Id}", success),

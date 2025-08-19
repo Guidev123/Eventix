@@ -14,8 +14,8 @@ namespace Eventix.Modules.Events.Application.Events.DomainEvents
     {
         public override async Task ExecuteAsync(EventPublishedDomainEvent notification, CancellationToken cancellationToken = default)
         {
-            var eventResult = await mediator.DispatchAsync(new GetEventByIdQuery(notification.EventId), cancellationToken);
-            var ticketTypesResult = await mediator.DispatchAsync(new GetTicketTypeByEventIdQuery(notification.EventId), cancellationToken);
+            var eventResult = await mediator.SendAsync(new GetEventByIdQuery(notification.EventId), cancellationToken);
+            var ticketTypesResult = await mediator.SendAsync(new GetTicketTypeByEventIdQuery(notification.EventId), cancellationToken);
 
             if (eventResult.IsFailure)
                 throw new EventixException(nameof(GetEventByIdQuery), eventResult.Error);

@@ -20,7 +20,7 @@ namespace Eventix.Modules.IntegrationTests.Ticketing.Carts
         {
             // Arrange
             await _factory.SeedRoleDataAsync();
-            var userResult = await _mediatorHandler.DispatchAsync(RegisterUserCommand);
+            var userResult = await _mediatorHandler.SendAsync(RegisterUserCommand);
 
             var customerResult = await Poller.WaitAndExecuteAsync(
                 TimeSpan.FromSeconds(15),
@@ -28,7 +28,7 @@ namespace Eventix.Modules.IntegrationTests.Ticketing.Carts
                 {
                     var query = new GetCustomerByIdQuery(userResult.Value.UserId);
 
-                    var customerResult = await _mediatorHandler.DispatchAsync(query);
+                    var customerResult = await _mediatorHandler.SendAsync(query);
 
                     return customerResult;
                 });
@@ -42,7 +42,7 @@ namespace Eventix.Modules.IntegrationTests.Ticketing.Carts
             command.SetCustomerId(customer.Id);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             userResult.IsSuccess.Should().BeTrue();

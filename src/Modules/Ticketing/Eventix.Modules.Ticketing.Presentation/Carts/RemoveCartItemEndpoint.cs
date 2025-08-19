@@ -19,7 +19,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Carts
                 var command = new RemoveItemCommand(id);
                 command.SetCustomerId(claimsPrincipal.GetUserId());
 
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.RemoveFromCart).WithTags(Tags.Carts);

@@ -17,7 +17,7 @@ namespace Eventix.Modules.Attendance.Infrastructure.Attendees.IntegrationEvents
 
             command.SetAttendeeId(integrationEvent.UserId);
 
-            var result = await mediator.DispatchAsync(command, cancellationToken);
+            var result = await mediator.SendAsync(command, cancellationToken);
 
             if (result.IsFailure)
                 throw new EventixException(nameof(UpdateAttendeeCommand), result.Error);

@@ -35,7 +35,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             var command = new RegisterUserCommand(firstName, lastName, email, password, confirmPassword);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().NotBeNull();
@@ -59,7 +59,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
                 );
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().BeNull();

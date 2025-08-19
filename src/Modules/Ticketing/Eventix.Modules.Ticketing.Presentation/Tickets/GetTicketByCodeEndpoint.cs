@@ -14,7 +14,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Tickets
         {
             app.MapGet("api/v1/tickets/code/{code}", async (string code, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetTicketByCodeQuery(code));
+                var result = await mediator.SendAsync(new GetTicketByCodeQuery(code));
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetTickets)

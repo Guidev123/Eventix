@@ -17,7 +17,7 @@ namespace Eventix.Modules.Events.Presentation.Events
                 IMediatorHandler mediator) =>
             {
                 command.SetEventId(id);
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).WithTags(Tags.Events)

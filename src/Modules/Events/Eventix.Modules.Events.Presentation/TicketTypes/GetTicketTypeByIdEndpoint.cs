@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.TicketTypes
         {
             app.MapGet("api/v1/events/ticket-types/{id:guid}", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetTicketTypeByIdQuery(id)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetTicketTypeByIdQuery(id)).ConfigureAwait(false);
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetTicketTypes)
             .WithTags(Tags.TicketTypes);

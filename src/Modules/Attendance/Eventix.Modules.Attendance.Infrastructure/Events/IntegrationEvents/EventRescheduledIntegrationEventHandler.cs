@@ -10,7 +10,7 @@ namespace Eventix.Modules.Attendance.Infrastructure.Events.IntegrationEvents
     {
         public override async Task ExecuteAsync(EventRescheduledIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                 new RescheduleEventCommand(
                     integrationEvent.EventId,
                     integrationEvent.StartsAtUtc,

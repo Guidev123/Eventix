@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Categories
         {
             app.MapGet("api/v1/categories/{id:guid}", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetCategoryByIdQuery(id)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetCategoryByIdQuery(id)).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetCategories)

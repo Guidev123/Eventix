@@ -27,7 +27,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             command.SetEventId(eventId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(EventErrors.NotFound(eventId));
@@ -52,7 +52,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();
@@ -74,7 +74,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

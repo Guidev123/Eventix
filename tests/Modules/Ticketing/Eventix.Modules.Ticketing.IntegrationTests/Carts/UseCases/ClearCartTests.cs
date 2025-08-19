@@ -20,7 +20,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             var command = new ClearCartCommand(Guid.NewGuid());
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(CustomerErrors.NotFound(command.CustomerId));
@@ -38,7 +38,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             var command = new ClearCartCommand(customerId);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();

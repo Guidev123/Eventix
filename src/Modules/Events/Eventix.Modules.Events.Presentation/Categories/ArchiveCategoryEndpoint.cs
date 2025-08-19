@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Categories
         {
             app.MapPut("api/v1/categories/{id:guid}/archive", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new ArchiveCategoryCommand(id)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new ArchiveCategoryCommand(id)).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.ModifyCategories)

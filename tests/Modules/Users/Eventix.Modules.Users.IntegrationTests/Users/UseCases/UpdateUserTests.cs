@@ -32,7 +32,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             command.SetUserId(Guid.NewGuid());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();
@@ -50,7 +50,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             command.SetUserId(userId);
 
             // Act
-            var updateResult = await _mediatorHandler.DispatchAsync(command);
+            var updateResult = await _mediatorHandler.SendAsync(command);
 
             // Assert
             updateResult.Error.Should().Be(UserErrors.NotFound(userId));
@@ -65,7 +65,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             // Arrange
             await _factory.SeedRoleDataAsync();
 
-            var result = await _mediatorHandler.DispatchAsync(new RegisterUserCommand(
+            var result = await _mediatorHandler.SendAsync(new RegisterUserCommand(
                 _faker.Name.FirstName(),
                 _faker.Name.LastName(),
                 _faker.Internet.Email(),
@@ -82,7 +82,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             command.SetUserId(userId);
 
             // Act
-            var updateResult = await mediator.DispatchAsync(command);
+            var updateResult = await mediator.SendAsync(command);
 
             // Assert
             updateResult.IsSuccess.Should().BeTrue();

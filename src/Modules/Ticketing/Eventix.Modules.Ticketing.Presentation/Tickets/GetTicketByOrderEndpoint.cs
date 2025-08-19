@@ -14,7 +14,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Tickets
         {
             app.MapGet("api/v1/tickets/orders/{id:guid}", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetTicketsByOrderQuery(id));
+                var result = await mediator.SendAsync(new GetTicketsByOrderQuery(id));
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetTickets)

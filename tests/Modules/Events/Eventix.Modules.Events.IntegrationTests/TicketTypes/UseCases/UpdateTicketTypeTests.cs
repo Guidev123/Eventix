@@ -25,7 +25,7 @@ public class UpdateTicketTypeTests : BaseIntegrationTest
         command.SetTicketTypeId(ticketType);
 
         // Act
-        var result = await _mediatorHandler.DispatchAsync(command);
+        var result = await _mediatorHandler.SendAsync(command);
 
         // Assert
         result.Error.Should().Be(TicketTypeErrors.NotFound(ticketType));
@@ -47,7 +47,7 @@ public class UpdateTicketTypeTests : BaseIntegrationTest
         var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
         // Act
-        var result = await mediator.DispatchAsync(command);
+        var result = await mediator.SendAsync(command);
 
         // Assert
         result.IsSuccess.Should().BeTrue();

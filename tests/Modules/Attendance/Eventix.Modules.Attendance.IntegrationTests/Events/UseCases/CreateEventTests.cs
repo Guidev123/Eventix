@@ -35,7 +35,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Events.UseCases
             var command = new CreateEventCommand(eventId, title, description, null, startsAtUtc, endsAtUtc);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();
@@ -57,7 +57,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Events.UseCases
                 null);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();

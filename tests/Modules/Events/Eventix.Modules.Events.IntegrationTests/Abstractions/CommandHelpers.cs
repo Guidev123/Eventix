@@ -10,7 +10,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Abstractions
     {
         internal static async Task<Guid> CreateCategoryAsync(this IMediatorHandler mediator, string name)
         {
-            return (await mediator.DispatchAsync(new CreateCategoryCommand(name))).Value.CategoryId;
+            return (await mediator.SendAsync(new CreateCategoryCommand(name))).Value.CategoryId;
         }
 
         internal static async Task<Guid> CreateEventAsync(
@@ -19,7 +19,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Abstractions
             DateTime? startsAtUtc = null)
         {
             var faker = new Faker();
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                  new CreateEventCommand(
                      faker.Music.Genre(),
                      faker.Lorem.Letter(50),
@@ -33,7 +33,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Abstractions
         internal static async Task<Guid> CreateTicketTypeAsync(this IMediatorHandler mediator, Guid eventId)
         {
             var faker = new Faker();
-            var result = await mediator.DispatchAsync(
+            var result = await mediator.SendAsync(
                 new CreateTicketTypeCommand(
                     eventId,
                     faker.Commerce.ProductName(),

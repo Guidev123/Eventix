@@ -25,7 +25,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Events.UseCases
             var command = new PublishEventCommand(eventId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(EventErrors.NotFound(eventId));

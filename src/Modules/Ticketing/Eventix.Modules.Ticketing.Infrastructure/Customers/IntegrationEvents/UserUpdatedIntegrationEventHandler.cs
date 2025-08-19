@@ -17,7 +17,7 @@ namespace Eventix.Modules.Ticketing.Infrastructure.Customers.IntegrationEvents
 
             command.SetCustomerId(integrationEvent.UserId);
 
-            var result = await mediator.DispatchAsync(command, cancellationToken).ConfigureAwait(false);
+            var result = await mediator.SendAsync(command, cancellationToken).ConfigureAwait(false);
 
             if (result.IsFailure)
                 throw new EventixException(nameof(UpdateCustomerCommand), result.Error);

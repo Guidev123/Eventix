@@ -16,7 +16,7 @@ namespace Eventix.Modules.Ticketing.Presentation.Carts
         {
             app.MapGet("api/v1/carts", async (ClaimsPrincipal claimsPrincipal, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetCartQuery(claimsPrincipal.GetUserId())).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetCartQuery(claimsPrincipal.GetUserId())).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetCart).WithTags(Tags.Carts);

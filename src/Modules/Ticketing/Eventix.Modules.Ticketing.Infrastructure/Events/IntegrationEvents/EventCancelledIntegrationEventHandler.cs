@@ -10,7 +10,7 @@ namespace Eventix.Modules.Ticketing.Infrastructure.Events.IntegrationEvents
     {
         public override async Task ExecuteAsync(EventCancelledIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(new CancelEventCommand(
+            var result = await mediator.SendAsync(new CancelEventCommand(
                 integrationEvent.EventId), cancellationToken);
 
             if (result.IsFailure)

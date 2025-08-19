@@ -10,7 +10,7 @@ namespace Eventix.Modules.Attendance.Infrastructure.Tickets.IntegrationEvents
     {
         public override async Task ExecuteAsync(TicketCreatedIntegrationEvent integrationEvent, CancellationToken cancellationToken = default)
         {
-            var result = await mediator.DispatchAsync(new CreateTicketCommand(
+            var result = await mediator.SendAsync(new CreateTicketCommand(
                 integrationEvent.TicketId,
                 integrationEvent.AttendeeId,
                 integrationEvent.EventId,

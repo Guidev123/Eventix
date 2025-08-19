@@ -37,7 +37,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Events.UseCases
                 [ticketType]);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();

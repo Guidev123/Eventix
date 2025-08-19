@@ -12,7 +12,7 @@ namespace Eventix.Modules.Users.Application.Users.DomainEvents
     {
         public override async Task ExecuteAsync(UserCreatedDomainEvent notification, CancellationToken cancellationToken = default)
         {
-            var userResult = await mediator.DispatchAsync(new GetUserByIdQuery(notification.UserId), cancellationToken);
+            var userResult = await mediator.SendAsync(new GetUserByIdQuery(notification.UserId), cancellationToken);
 
             if (userResult.IsFailure)
                 throw new EventixException(nameof(GetUserByIdQuery), userResult.Error);

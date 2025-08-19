@@ -20,7 +20,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var command = new CreateCategoryCommand("Category name");
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
@@ -35,7 +35,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var command = new CreateCategoryCommand("");
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsFailure.Should().BeTrue();

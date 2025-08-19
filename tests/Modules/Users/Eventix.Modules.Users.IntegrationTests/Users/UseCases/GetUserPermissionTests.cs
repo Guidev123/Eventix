@@ -22,7 +22,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             var identityId = Guid.NewGuid().ToString();
 
             // Act
-            var permissionsResult = await _mediatorHandler.DispatchAsync(new GetUserPermissionsQuery(identityId));
+            var permissionsResult = await _mediatorHandler.SendAsync(new GetUserPermissionsQuery(identityId));
 
             // Assert
             permissionsResult.Error.Should().Be(UserErrors.NotFound(identityId));
@@ -36,7 +36,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
         {
             // Arrange
             await _factory.SeedRoleDataAsync();
-            var result = await _mediatorHandler.DispatchAsync(new RegisterUserCommand(
+            var result = await _mediatorHandler.SendAsync(new RegisterUserCommand(
                 _faker.Name.FirstName(),
                 _faker.Name.LastName(),
                 _faker.Internet.Email(),
@@ -49,7 +49,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             var identityId = user.IdentiyProviderId;
 
             // Act
-            var permissionsResult = await _mediatorHandler.DispatchAsync(new GetUserPermissionsQuery(identityId.ToString()));
+            var permissionsResult = await _mediatorHandler.SendAsync(new GetUserPermissionsQuery(identityId.ToString()));
 
             // Assert
             permissionsResult.IsSuccess.Should().BeTrue();

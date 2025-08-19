@@ -14,7 +14,7 @@ namespace Eventix.Modules.Attendance.Presentation.Events
         {
             app.MapGet("api/v1/attendance/events/{id:guid}/statistics", async (Guid id, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetEventStatisticsQuery(id));
+                var result = await mediator.SendAsync(new GetEventStatisticsQuery(id));
 
                 return result.Match(() => Results.Ok(result.Value), ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetEventStatistics).WithTags(Tags.Attendance);

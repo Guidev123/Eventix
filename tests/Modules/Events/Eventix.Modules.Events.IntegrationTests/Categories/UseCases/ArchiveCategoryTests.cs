@@ -21,7 +21,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var command = new ArchiveCategoryCommand(Guid.NewGuid());
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(CategoryErrors.NotFound(command.CategoryId));
@@ -40,7 +40,7 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
@@ -58,10 +58,10 @@ namespace Eventix.Modules.Events.IntegrationTests.Categories.UseCases
             using var newScope = _factory.Services.CreateScope();
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
-            await mediator.DispatchAsync(command);
+            await mediator.SendAsync(command);
 
             // Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(CategoryErrors.AlreadyArchived);

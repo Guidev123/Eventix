@@ -14,7 +14,7 @@ namespace Eventix.Modules.Attendance.Presentation.Attendees
         {
             app.MapPost("api/v1/attendees/check-in", async (CheckInAttendeeCommand command, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(command);
+                var result = await mediator.SendAsync(command);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.CheckInTicket).WithTags(Tags.Attendance);

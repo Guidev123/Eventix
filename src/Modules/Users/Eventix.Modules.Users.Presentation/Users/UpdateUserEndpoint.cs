@@ -15,7 +15,7 @@ namespace Eventix.Modules.Users.Presentation.Users
             app.MapPut("api/v1/users/{id:guid}", async (Guid id, UpdateUserCommand command, IMediatorHandler mediator) =>
             {
                 command.SetUserId(id);
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(Results.NoContent, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.ModifyUser).WithTags(Tags.Users);

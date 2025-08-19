@@ -25,7 +25,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Tickets.UseCases
                 $"tc_{_faker.Random.String(27)}");
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(AttendeeErrors.NotFound(command.AttendeeId));
@@ -45,7 +45,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Tickets.UseCases
                 $"tc_{_faker.Random.String(27)}");
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.Error.Should().Be(EventErrors.NotFound(command.EventId));
@@ -66,7 +66,7 @@ namespace Eventix.Modules.Attendance.IntegrationTests.Tickets.UseCases
                 $"tc_{_faker.Random.String(27)}");
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();

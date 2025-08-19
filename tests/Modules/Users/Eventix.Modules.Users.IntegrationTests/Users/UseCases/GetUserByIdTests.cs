@@ -21,7 +21,7 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
             var userId = Guid.NewGuid();
 
             // Act
-            var userResult = await _mediatorHandler.DispatchAsync(new GetUserByIdQuery(userId));
+            var userResult = await _mediatorHandler.SendAsync(new GetUserByIdQuery(userId));
 
             // Assert
             userResult.Error.Should().Be(UserErrors.NotFound(userId));
@@ -40,10 +40,10 @@ namespace Eventix.Modules.Users.IntegrationTests.Users.UseCases
                 "Admin@123",
                 "Admin@123");
 
-            var createUserResult = await _mediatorHandler.DispatchAsync(command);
+            var createUserResult = await _mediatorHandler.SendAsync(command);
 
             // Act
-            var userResult = await _mediatorHandler.DispatchAsync(new GetUserByIdQuery(createUserResult.Value.UserId));
+            var userResult = await _mediatorHandler.SendAsync(new GetUserByIdQuery(createUserResult.Value.UserId));
 
             // Assert
             userResult.Value.Id.Should().Be(createUserResult.Value.UserId);

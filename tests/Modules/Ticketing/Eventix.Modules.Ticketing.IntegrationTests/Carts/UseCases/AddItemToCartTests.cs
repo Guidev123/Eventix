@@ -30,7 +30,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             command.SetCustomerId(customerId);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();
@@ -47,7 +47,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             command.SetCustomerId(Guid.NewGuid());
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(CustomerErrors.NotFound(command.CustomerId));
@@ -66,7 +66,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             command.SetCustomerId(customerId);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(TicketTypeErrors.NotFound(command.TicketTypeId));
@@ -89,7 +89,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Carts.UseCases
             command.SetCustomerId(customerId);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(TicketTypeErrors.NotEnoughQuantity(Quantity));

@@ -17,7 +17,7 @@ namespace Eventix.Modules.Events.Presentation.Categories
                                                   [FromQuery] int page = PresentationModule.DEFAULT_PAGE,
                                                   [FromQuery] int pageSize = PresentationModule.DEFAULT_PAGE_SIZE) =>
             {
-                var result = await mediator.DispatchAsync(new GetAllCategoriesQuery(page, pageSize)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetAllCategoriesQuery(page, pageSize)).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetCategories)

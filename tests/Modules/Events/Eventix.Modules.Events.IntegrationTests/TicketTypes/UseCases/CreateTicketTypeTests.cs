@@ -25,7 +25,7 @@ public class CreateTicketTypeTests : BaseIntegrationTest
             _faker.Random.Decimal(1, 5));
 
         // Act
-        var result = await _mediatorHandler.DispatchAsync(command);
+        var result = await _mediatorHandler.SendAsync(command);
 
         // Assert
         result.Error.Should().Be(EventErrors.NotFound(command.EventId));

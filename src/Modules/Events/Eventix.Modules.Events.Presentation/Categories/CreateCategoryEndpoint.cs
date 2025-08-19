@@ -14,7 +14,7 @@ namespace Eventix.Modules.Events.Presentation.Categories
         {
             app.MapPost("api/v1/categories", async (CreateCategoryCommand command, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(command).ConfigureAwait(false);
+                var result = await mediator.SendAsync(command).ConfigureAwait(false);
 
                 return result.Match(
                     success => Results.Created($"/categories/{success.CategoryId}", success),

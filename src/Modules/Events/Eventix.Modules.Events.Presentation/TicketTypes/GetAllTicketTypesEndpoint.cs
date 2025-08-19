@@ -17,7 +17,7 @@ namespace Eventix.Modules.Events.Presentation.TicketTypes
                                                            [FromQuery] int page = PresentationModule.DEFAULT_PAGE,
                                                            [FromQuery] int pageSize = PresentationModule.DEFAULT_PAGE_SIZE) =>
             {
-                var result = await mediator.DispatchAsync(new GetAllTicketTypesQuery(page, pageSize)).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetAllTicketTypesQuery(page, pageSize)).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetTicketTypes)

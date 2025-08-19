@@ -16,7 +16,7 @@ namespace Eventix.Modules.Users.Presentation.Users
         {
             app.MapGet("api/v1/users/profile", async (ClaimsPrincipal claims, IMediatorHandler mediator) =>
             {
-                var result = await mediator.DispatchAsync(new GetUserByIdQuery(claims.GetUserId())).ConfigureAwait(false);
+                var result = await mediator.SendAsync(new GetUserByIdQuery(claims.GetUserId())).ConfigureAwait(false);
 
                 return result.Match(Results.Ok, ApiResults.Problem);
             }).RequireAuthorization(PolicyExtensions.GetUser).WithTags(Tags.Users);

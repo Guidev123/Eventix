@@ -31,12 +31,12 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Orders.UseCases
             var addItemToCartCommand = new AddItemToCartCommand(ticketId, Quantity);
             addItemToCartCommand.SetCustomerId(customerId);
 
-            await _mediatorHandler.DispatchAsync(addItemToCartCommand);
+            await _mediatorHandler.SendAsync(addItemToCartCommand);
 
             var command = new CreateOrderCommand(customerId);
 
             // Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
@@ -52,7 +52,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Orders.UseCases
             var command = new CreateOrderCommand(Guid.NewGuid());
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(CustomerErrors.NotFound(command.CustomerId));
@@ -68,7 +68,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Orders.UseCases
             var command = new CreateOrderCommand(customerId);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(CartErrors.Empty);

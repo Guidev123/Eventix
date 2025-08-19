@@ -27,7 +27,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Customers.UseCases
                 string.Empty);
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsFailure.Should().BeTrue();
@@ -45,7 +45,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Customers.UseCases
                 _faker.Name.LastName());
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();
@@ -71,7 +71,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Customers.UseCases
             command.SetCustomerId(Guid.NewGuid());
 
             //Act
-            var result = await _mediatorHandler.DispatchAsync(command);
+            var result = await _mediatorHandler.SendAsync(command);
 
             //Assert
             result.Error.Should().Be(CustomerErrors.NotFound(command.CustomerId));
@@ -91,7 +91,7 @@ namespace Eventix.Modules.Ticketing.IntegrationTests.Customers.UseCases
             var mediator = newScope.ServiceProvider.GetRequiredService<IMediatorHandler>();
 
             //Act
-            var result = await mediator.DispatchAsync(command);
+            var result = await mediator.SendAsync(command);
 
             //Assert
             result.IsSuccess.Should().BeTrue();
